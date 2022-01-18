@@ -4,7 +4,7 @@
 
 ### 1. 封裝
 
-​		朕賜給你的，才是你的；朕不給，你不能搶
+* 朕賜給你的，才是你的；朕不給，你不能搶
 
 > * public : 做公益有愛心，大家都能用
 >
@@ -13,7 +13,7 @@
 > * private : 個人秘密，自己才能用
 >
 
-​		使用 private 來實現封裝性的概念！
+* 使用 private 來實現封裝性的概念！
 
 > 優點 : 
 >
@@ -30,7 +30,7 @@
 
 ### 2. 繼承
 
-​		透過類別的繼承，減少重複出現的結構
+* 透過類別的繼承，減少重複出現的結構
 
 > ***EX : 動物 --> 哺乳類 --> 貓***
 >
@@ -40,7 +40,7 @@
 
 ### 3. 多型
 
-​		當 **子類別** 的物件宣告或轉型成 **父類別** 或 **祖先類別** 的型別時，還可以正確執行該子類別的行為。
+* 當 **子類別** 的物件宣告或轉型成 **父類別** 或 **祖先類別** 的型別時，還可以正確執行該子類別的行為。
 
 * ​		How to implement ?
 
@@ -50,7 +50,7 @@
 >      public int computeArea (int length){
 >          return length * length;
 >      } 
->      
+>                
 >      public int computeArea (int length, int width){
 >      	return length * width;
 >      }
@@ -80,7 +80,7 @@
 
 ### 4. 抽象
 
-​		當實體化沒有任何意義的父類別，就可以考慮改成抽象類別。
+* 當實體化沒有任何意義的父類別，就可以考慮改成抽象類別。
 
 > EX : 
 >
@@ -298,7 +298,60 @@
 
     
 
-## 
+## 同步與非同步
+
+* 同步 : 必須從頭到尾等待直到完成為止
+* 非同步 : 一個任務可以處於尚未完成的狀態，之後再接續下去繼續完成
+
+> EX : 家庭主婦
+>
+> - 如果你是個同步的家庭主婦，洗衣服時，你必須等到衣服洗完才能繼續做其他事，不能去打電動看youtube。
+> - 如果你是個非同步的家庭主婦，你可以啟動洗衣機之後，先去做其他事，之後等到洗衣機脫水完逼逼叫，再接續下去處理其他任務。
+
+* 執行緒 (Thread)
+  * 單執行緒
+    - 從頭到尾只有一個 thread 可以執行程式
+  * 多執行緒
+    - 有兩個以上的 thread 能夠執行程式
+
+* #### **非同步和多執行緒無關**
+
+  * Threading is about `workers`; Asynchrony is about `tasks`.
+  * **多執行緒(Multithreading)**:著重在`使用多個工作者(Thread)`，它可以同時進行多個工作，但實際上的運作方式是並行還是平行，就看您CPU的能耐如何了
+  * **非同步(Asynchronous)**:著重在`有效的使用工作者(Thread)`，它可以讓有限的Threads盡可能的完成更多的工作
+
+* 多執行緒不一定比較有效率；非同步不會做得比較快，但是非同步讓你 **不用耗在等待回應** 上，而是可以利用等待時間去處理其他工作，效能也就跟著提升了。
+
+* #### **任務，是非同步的抽象**
+
+  * 這就是非同步的本質，對「任務」這件事進行抽象，讓我們可以表達一件事情是否做到一半、是否完成、接下來要繼續做什麼。
+  * 在C#裡，我們用 Task 類別表達非同步這件事。
+
+* #### **C# Task**
+
+  * 不僅乘載了非同步的概念，另外還有許多關於執行的方法
+
+* **async 是實作細節**
+  * 要在這個方法內進行一個非同步的任務
+  * 而且我需要在這個方法內等待某個非同步任務完成後，繼續進行之後的任務
+  * 有 async 就一定有 await
+    * Compiler 才知道非同步的斷點在哪裡
+
+## 委派 (Deligate)
+
+* delegate是一個類別，在實體化委派事件時，可以自行決定這個委派事件要做哪些方法
+
+* 簡單來說 delegate 是將 function 當成參數傳遞的型別。
+
+* 注意事項 : 
+
+  * 委派的事件必須要與 **定義的方法回傳型態** 與 **傳入的參數類型** 一致才能使用
+
+    > EX : 
+    >
+    > ![](https://miro.medium.com/max/1370/1*QrsrRMA6e8KZ053FIzh6vg.png)
+    >
+    > 
 
 ## 參考來源
 
@@ -308,3 +361,5 @@
 > 4. https://blog.miniasp.com/post/2009/10/12/About-CSharp-using-Statement-misunderstanding-on-try-catch-finally
 > 5. https://ithelp.ithome.com.tw/articles/10223785
 > 6. https://hoohoo.top/blog/c-linq-teaching-notes-using-visual-studio/
+> 6. https://blog.opasschang.com/understand-csharp-asyn/
+> 6. https://medium.com/@WilliamWhetstone/c-%E4%BD%95%E8%AC%82%E5%A7%94%E6%B4%BE-delegate-e7eec68da4e2
